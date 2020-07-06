@@ -169,6 +169,7 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='login')
 def userPage(request):
     
     #customer = Customer.objects.get(id=pk)
@@ -192,6 +193,7 @@ def userPage(request):
     }
     return render(request, 'accounts/user.html', datas)
 
+@login_required(login_url='login')
 def Usettings(request):
     customer= request.user.customer
     form = CustomerForm(instance=customer)
