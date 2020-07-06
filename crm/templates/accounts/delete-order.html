@@ -1,0 +1,28 @@
+{% extends 'accounts/main.html' %}
+
+
+{% block title %}
+    <title>Dashboard</title>
+{% endblock title %}
+
+
+{% block content %}
+<br>
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <h4>Do you want to remove {{item}}? </h4>
+                <form action="{% url 'deleteOrder' item.id%}" method="post">
+                    {% csrf_token%}
+
+                    <a href="{% url 'home'%}" class="btn btn-sm btn-primary"> Cancel</a>
+                    <input class="btn btn-sm btn-danger" type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}

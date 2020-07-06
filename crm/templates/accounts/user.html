@@ -1,0 +1,48 @@
+{% extends 'accounts/main.html' %}
+
+
+{% block title %}
+    <title>User Statistics</title>
+{% endblock title %}
+
+
+{% block content %}
+    
+<br>
+{% include 'accounts/status.html' %}
+
+
+<div class="col-md-12">
+    <h5>LAST ORDERS:</h5>
+    <hr>
+    <div class="card card-body">
+        
+        <table class="table table-sm">
+            
+            <tr>
+                
+                <th>Product</th>
+                <th>Date Ordered</th>
+                <th>Status</th>
+                
+                
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{order.product}}</td>
+                    <td>{{order.date_add}}</td>
+                    <td>{{order.status}}</td>
+                    
+          </tr>
+            {%endfor%}
+
+        </table>
+    </div>
+    <div>
+        <br>
+        <a href="{% url 'customer' customer.id%}" class="btn btn-xs btn-info">My Customer Page</a>
+    </div>
+</div>
+
+ <hr>
+{% endblock content %}
