@@ -32,6 +32,7 @@
               </li>
 
             </ul>
+            
 
             {% endif %}
               
@@ -44,9 +45,24 @@
         </div>
         {% if user.is_authenticated %}
               
-                  <span class="nav-link btn btn-info" style="margin-right: 20px;"> Connected as {{user.username}} </span>
-                  <span><a href="{% url 'user-settings' %}" class="nav-link  btn btn-primary" style="margin-right: 20px;"> Settings</a></span>
+        <div class="dropdown" style='margin-right: 20px;'>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='margin-right: 20px;'>
+            <img src="{{request.user.customer.profile_pic.url}}" alt="" width=50 heigh=10 style="border-radius: 50%;"> 
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{% url 'user-settings' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'customer' request.user.customer.id %}">My Account </a>
+            <a class="dropdown-item" href="{% url 'user' %}">Orders Statistics</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </div>
+        </div>
+
+<!-- 
+                  <span class="nav-link " style="margin-right: 20px;"> <img src="{{request.user.customer.profile_pic.url}}" alt="" width=50 heigh=10 style="border-radius: 50%;"> </span>
+                  <span><a href="{% url 'user-settings' %}" class="nav-link  btn btn-primary" style="margin-right: 20px;"> Profile</a></span>
+                  <span><a href="{% url 'customer' request.user.customer.id %}" class="nav-link  btn btn-success" style="margin-right: 20px;"> My Account</a></span>
                   <span><a href="{% url 'logout' %}" class="nav-link  btn btn-danger"> Logout</a></span>
+ -->
 
         
         {% else %}
