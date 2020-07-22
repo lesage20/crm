@@ -128,3 +128,29 @@ STATICFILES_DIRS= [
 
 STATIC_ROOT=os.path.join(BASE_DIR, '../static_cdn')
 MEDIA_ROOT=os.path.join(BASE_DIR, '../media_cdn')
+
+#email configuration
+    #with api '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'
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+# SENDGRID_API_KEY = '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' #'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'
+# SENDGRID_SANDBOX_MODE_IN_DEBUG=False
+# SENDGRID_ECHO_TO_STDOUT=True
+
+# with google smtp
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'angezanou00@gmail.com' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = 'Angezanar3*'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# withsendgrid smtp
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+# SENDGRID_API_KEY = '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'
+# #EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# SENDGRID_SANDBOX_MODE_IN_DEBUG=False

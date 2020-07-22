@@ -49,7 +49,7 @@
           <button class="btn btn-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='margin-right: 20px;'>
             <img src="{{request.user.customer.profile_pic.url}}" alt="" width=50 heigh=10 style="border-radius: 50%;"> 
           </button>
-          <div class="dropdown-menu mg-2" aria-labelledby="dropdownMenuButton" style='margin-right: 300px;'>
+          <div class="dropdown-menu " aria-labelledby="dropdownMenuButton" style='margin-right: 300px;'>
             <a class="dropdown-item" href="{% url 'user-settings' %}">Profile</a>
             <a class="dropdown-item" href="{% url 'customer' request.user.customer.id %}">My Account </a>
             <a class="dropdown-item" href="{% url 'user' %}">Orders Statistics</a>

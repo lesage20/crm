@@ -131,8 +131,6 @@ def registerUser(request):
         form = CreateUser(request.POST)
         if form.is_valid:
             user = form.save()
-            
-            
             username = form.cleaned_data.get('username')
             messages.success(request, f'+ Account {username} successfully  created')
             return redirect('home')
@@ -207,3 +205,4 @@ def Usettings(request):
         'form': form,
     }
     return render(request, 'accounts/user-settings.html', datas)
+
