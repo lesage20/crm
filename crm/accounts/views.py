@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import *
+from django.http import HttpResponse
 from .forms import OrderForm, CustomerForm, CreateUser
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -41,16 +42,20 @@ def products(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles='customer')
 def customer(request, pk):
-    customers = Customer.objects.get(id=pk)
-    orders = Order.objects.filter(customer=customers) 
-    total_orders = orders.count()
-    datas = {
-        'customers': customers,
-        'orders': orders,
-        'total_orders': total_orders,
+    if int(request.user.customer.id) != int(pk):
+        return HttpResponse("You are not authorize")
+    else:
+        customers = Customer.objects.get(id=pk)
         
-    }
-    return render(request, 'accounts/customers.html', datas)
+        orders = Order.objects.filter(customer=customers) 
+        total_orders = orders.count()
+        datas = {
+            'customers': customers,
+            'orders': orders,
+            'total_orders': total_orders,
+            
+        }
+        return render(request, 'accounts/customers.html', datas)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'customer'])
@@ -62,6 +67,7 @@ def createOrder(request, pk):
         formset = OrderFormSet(request.POST, instance=customer)
         if formset.is_valid():
             formset.save()
+            
             return redirect('/')
     
     datas = {
@@ -116,6 +122,7 @@ def createCustomer(request):
         form = CustomerForm(request.POST)
         if form.is_valid:
             form.save()
+            
             return redirect('/')
     
     datas = {
@@ -131,6 +138,7 @@ def registerUser(request):
         form = CreateUser(request.POST)
         if form.is_valid:
             user = form.save()
+            login(request, user=user)
             username = form.cleaned_data.get('username')
             messages.success(request, f'+ Account {username} successfully  created')
             return redirect('home')
